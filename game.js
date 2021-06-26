@@ -1,5 +1,5 @@
 console.log("Snake and Ladder");
-const number = [
+const numberArray = [
     [16, 15, 14, 13],
     [9, 10, 11, 12],
     [8, 7, 6, 5],
@@ -8,29 +8,29 @@ const number = [
 
 function gameBoard() {
     let str = "";
-
-    for (let i = 0; i < number.length; i++) {
-        str += `<div class="board">`
-        for (let num of number[i]) {
+    numberArray.map((row) => {
+        str += `<div class="board">`;
+        row.map((box) => {
             str += `
-                <div class="box-number">
-                    <span>${num}</span>
-                </div>
-            `;
-        }
-        str += `</div>`
-    }
+                    <div class="box-number">
+                        <span>${box}</span>
+                    </div>
+                `;
+        });
+        str += `</div>`;
+    });
     document.querySelector(".container-board").innerHTML = str;
 }
 
 //Roll Dice 
 const image = document.querySelector("img");
+let randomNumber;
 function rollDice() {
     image.setAttribute("src", "images/dice.gif");
     setTimeout(rollOut, 300);
 }
 
 function rollOut() {
-    const randomNumber = Math.floor(Math.random() * 6) + 1;
+    randomNumber = Math.floor(Math.random() * 6) + 1;
     image.setAttribute("src", `images/${randomNumber}.png`);
 }
