@@ -81,3 +81,7 @@ img {
 .btn:active {
   transform: translateY(4px);
 }
+
+.active{
+  background-image: linear-gradient(20deg, #184e33, #9fa547 80%);
+}
