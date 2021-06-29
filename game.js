@@ -12,7 +12,7 @@ function gameBoard() {
         str += `<div class="board">`;
         row.map((box) => {
            str += `
-                    <div class="box-number">
+                    <div class="box-number" data-number=${box}>
                         <span>${box}</span>
                     </div>
                 `;
@@ -24,32 +24,28 @@ function gameBoard() {
 
 //Roll Dice 
 const image = document.querySelector("img");
-let randomNumber;
 function rollDice() {
     image.setAttribute("src", "images/dice.gif");
     setTimeout(rollOut, 300);
 }
 
 function rollOut() {
-    randomNumber = Math.floor(Math.random() * 6) + 1;
+    const randomNumber = Math.floor(Math.random() * 6) + 1;
     image.setAttribute("src", `images/${randomNumber}.png`);
-    setActiveClass();
+    setActiveClass(randomNumber);
 }
 
-function setActiveClass(){
-    const boxes = document.querySelectorAll("span");
-    
-    for (let num = 0; num < boxes.length; num++) {
+function setActiveClass(randomNumber){
+    let activeBox = document.querySelector(".active");
+    console.log(activeBox);
 
-        let txtNumber = parseInt(boxes[num].innerText);
-        const activeBox = boxes[num].parentElement.classList.contains("active");
-        
-        boxes[num].parentElement.classList.remove("active");
-        if (randomNumber === 6 || randomNumber === 1) {
-            if(txtNumber === 1){
-                console.log(`true ${boxes[num].innerText}, ${randomNumber}`)
-                boxes[num].parentElement.classList.add("active");
-            }
+    if (activeBox === null) {
+        if (randomNumber === 6 || randomNumber === 1){
+            console.log(`false ${randomNumber}`);
+            const boxNumber = document.querySelector("[data-number = '1']");
+            console.log(boxNumber);
+            boxNumber.classList.add("active");
         }
     }
+    
 }
