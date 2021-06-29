@@ -47,5 +47,29 @@ function setActiveClass(randomNumber){
             boxNumber.classList.add("active");
         }
     }
-    
+    else{
+        const lastBox = document.querySelector(".box-number");
+        const lastBoxNumber = parseInt(lastBox.getAttribute("data-number"));
+        console.log(lastBoxNumber);
+
+        console.log(`true ${activeBox}`);
+        const count = randomNumber + parseInt(activeBox.getAttribute("data-number"));
+        console.log(count, randomNumber);
+        
+        if (count < lastBoxNumber){
+            activeBox.classList.remove("active");
+            const boxNumber = document.querySelector(`[data-number = '${count}']`);
+            console.log(boxNumber);
+            boxNumber.classList.add("active");
+        }
+        else if (count === lastBoxNumber){
+            activeBox.classList.remove("active");
+            const boxNumber = document.querySelector(`[data-number = '${count}']`);
+            console.log(boxNumber);
+            boxNumber.classList.add("active");
+            setTimeout(() => {
+                alert("You Won!!!!");
+            }, 200);
+        }
+    }
 }
